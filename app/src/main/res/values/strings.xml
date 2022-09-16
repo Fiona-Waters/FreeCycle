@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">FreeCycle</string>
+    <string name="button_addListing">Add Listing</string>
+    <string name="hint_listingName">Name</string>
+    <string name="hint_userTextLocation">Location</string>
+    <string name="hint_userEircode">Eircode</string>
+    <string name="hint_listingTitle">Listing Title</string>
+    <string name="hint_listingDescription">Listing Description</string>
+    <string name="addListingHeader">Add a Listing</string>
+    <string name="menu_addListing">Add Listing</string>
+    <string name="menu_cancelListing">Cancel</string>
 </resources>

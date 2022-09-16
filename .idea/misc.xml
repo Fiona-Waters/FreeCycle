@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2175" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2175" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_free_cycle_list.xml" value="0.32135416666666666" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_freecycle.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_freecycle_list.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/card_freecycle.xml" value="0.1875" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/menu/listing_menu.xml" value="0.18072916666666666" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/menu/menu_main.xml" value="0.1875" />
       </map>
     </option>
   </component>
