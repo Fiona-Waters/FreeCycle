@@ -1,3 +1,11 @@
 package org.wit.freecycle.models
 
-data class FreecycleModel(var name: String = "", var location: String = "", var eircode: String = "", var listingTitle: String = "", var listingDescription: String = "")
+import android.net.Uri
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class FreecycleModel(var id: Long = 0, var name: String = "",
+                          var location: String = "", var eircode: String = "",
+                          var listingTitle: String = "", var listingDescription: String = "",
+                          var image: Uri = Uri.EMPTY ) : Parcelable
