@@ -149,6 +149,21 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/deleteListing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:stateListAnimator="@null"
+                    android:text="@string/button_delete_listing"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/dangerRed"
+                    android:visibility="invisible"/>
+
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

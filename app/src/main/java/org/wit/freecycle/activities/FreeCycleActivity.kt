@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.freecycle.R
@@ -31,7 +33,7 @@ class FreeCycleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_freecycle)
 
         i("FreeCycle Activity started..")
-
+      //  binding.deleteListing.setEnabled(false)
         binding = ActivityFreecycleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -55,6 +57,10 @@ class FreeCycleActivity : AppCompatActivity() {
             binding.location.setText(listing.location)
             binding.eircode.setText(listing.eircode)
             binding.btnAdd.setText(R.string.save_listing)
+            binding.deleteListing.setText(R.string.button_delete_listing)
+            // only show delete listing button in edit view
+            binding.deleteListing.setVisibility(View.VISIBLE)
+
             Picasso.get()
                 .load(listing.image)
                 .into(binding.ListingImage)
@@ -85,7 +91,12 @@ class FreeCycleActivity : AppCompatActivity() {
                     .show()
             }
         }
-
+        binding.deleteListing.setOnClickListener() {
+            app.listings.delete(listing)
+            i("delete button pressed: $listing")
+            setResult(RESULT_OK)
+            finish()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -35,6 +35,11 @@ class FreecycleMemStore : FreecycleStore {
         }
     }
 
+    override fun delete(listing: FreecycleModel) {
+        listings.remove(listing)
+        logAll()
+    }
+
     fun logAll() {
         listings.forEach{ i("${it}")}
     }

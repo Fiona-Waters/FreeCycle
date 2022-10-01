@@ -15,5 +15,6 @@
     <string name="select_listing_image">Select Listing Image</string>
     <string name="edit_image"> Edit Image </string>
     <string name="hint_listingImage">Listing Image</string>
+    <string name="button_delete_listing">Delete Listing</string>
 
 </resources>
