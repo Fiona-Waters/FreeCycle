@@ -39,6 +39,7 @@ class FreeCycleActivity : AppCompatActivity() {
 
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
 
         app = application as MainApp
         i("Freecycle activity started")

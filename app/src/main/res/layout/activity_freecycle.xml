@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome To GeeksforGeeks"
+        android:text="Welcome To FreeCycle"
         android:textColor="@color/colorAccent"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/addListingHeader"
                 android:background="@color/blueMain"
-                android:titleTextColor="@color/black" />
+                android:titleTextColor="@color/black" >
+            <TextView
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/selima"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFF"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView

@@ -31,9 +31,9 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = FreecycleAdapter(app.listings.findAll(), this)
-
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
 
         registerRefreshCallback()
     }
