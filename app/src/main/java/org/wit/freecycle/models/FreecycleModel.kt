@@ -8,4 +8,4 @@ import kotlinx.parcelize.Parcelize
 data class FreecycleModel(var id: Long = 0, var name: String = "",
                           var location: String = "", var eircode: String = "",
                           var listingTitle: String = "", var listingDescription: String = "",
-                          var image: Uri = Uri.EMPTY ) : Parcelable
+                          var image: Uri = Uri.EMPTY, var itemAvailable: Boolean = true   ) : Parcelable

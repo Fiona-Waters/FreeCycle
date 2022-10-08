@@ -136,6 +136,24 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="18sp" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="true"
+                    android:textOn="@string/toggle_textOn"
+                    android:textOff="@string/toggle_textOff"
+                    android:background="@drawable/selector"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Button
                     android:id="@+id/chooseImage"
                     android:layout_width="match_parent"
@@ -148,6 +166,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
+
 
                 <ImageView
                     android:id="@+id/ListingImage"

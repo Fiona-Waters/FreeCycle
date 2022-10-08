@@ -4,9 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CheckBox
+import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -57,8 +61,10 @@ class FreeCycleActivity : AppCompatActivity() {
             binding.name.setText(listing.name)
             binding.location.setText(listing.location)
             binding.eircode.setText(listing.eircode)
+            binding.toggleButton.isChecked = listing.itemAvailable
             binding.btnAdd.setText(R.string.save_listing)
             binding.deleteListing.setText(R.string.button_delete_listing)
+
             // only show delete listing button in edit view
             binding.deleteListing.setVisibility(View.VISIBLE)
 
@@ -75,6 +81,7 @@ class FreeCycleActivity : AppCompatActivity() {
             listing.eircode = binding.eircode.text.toString()
             listing.listingTitle = binding.listingTitle.text.toString()
             listing.listingDescription = binding.listingDescription.text.toString()
+            listing.itemAvailable = binding.toggleButton.isChecked
 
             if (listing.listingTitle.isNotEmpty() && listing.listingDescription.isNotEmpty() && listing.name.isNotEmpty() && listing.location.isNotEmpty() && listing.eircode.isNotEmpty()) {
                 if(edit) {
@@ -133,4 +140,6 @@ class FreeCycleActivity : AppCompatActivity() {
                 }
             }
     }
+
+
 }

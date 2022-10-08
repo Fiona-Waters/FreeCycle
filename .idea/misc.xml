@@ -6,13 +6,17 @@
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2175" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable/freecycle_logo.xml" value="0.183" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2175" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable/selector.xml" value="0.2605" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable/toggleoff.xml" value="0.2605" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/drawable/toggleon.xml" value="0.2605" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/font/font_resource.xml" value="0.1840277777777778" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_free_cycle_list.xml" value="0.11527377521613832" />
-        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_freecycle.xml" value="0.1" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_freecycle.xml" value="0.264" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_freecycle_list.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/activity_splash_screen.xml" value="0.21240942028985507" />
-        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/card_freecycle.xml" value="0.1875" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/card_freecycle.xml" value="0.264" />
+        <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/my_btn_toggle.xml" value="0.2421875" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/layout/selima.xml" value="0.1" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/menu/listing_menu.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/fiwat/AndroidStudioProjects/FreeCycle/app/src/main/res/menu/menu_main.xml" value="0.1875" />

@@ -16,5 +16,8 @@
     <string name="edit_image"> Edit Image </string>
     <string name="hint_listingImage">Listing Image</string>
     <string name="button_delete_listing">Delete Listing</string>
+    <string name="listing_status">Item Available</string>
+    <string name="toggle_textOff">Listing Inactive</string>
+    <string name="toggle_textOn">Listing Active</string>
 
 </resources>

@@ -13,4 +13,5 @@
     <color name="blueMain">#184582</color>
     <color name="grey">#C9D8E0</color>
     <color name="dangerRed">#F3360f</color>
+    <color name="activeGreen">#10c46a</color>
 </resources>
