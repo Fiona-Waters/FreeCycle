@@ -8,9 +8,7 @@ import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.CheckBox
-import android.widget.Toast
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -22,6 +20,7 @@ import org.wit.freecycle.helpers.showImagePicker
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
 import timber.log.Timber.i
+import java.util.*
 
 
 class FreeCycleActivity : AppCompatActivity() {
@@ -52,6 +51,27 @@ class FreeCycleActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
         registerImagePickerCallback()
+
+//        val datePicker = findViewById<DatePicker>(R.id.date_Picker)
+//        val today = Calendar.getInstance()
+//        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+//            today.get(Calendar.DAY_OF_MONTH)
+//
+//        ) { view, year, month, day ->
+//            val month = month + 1
+//            val msg = "You Selected: $day/$month/$year"
+//            Toast.makeText(this@FreeCycleActivity, msg, Toast.LENGTH_SHORT).show()
+//        }
+
+        binding.btn.setOnClickListener {
+            val datePicker = findViewById<DatePicker>(R.id.datePicker)
+            Toast.makeText(this,"${datePicker.year} / ${datePicker.month} / ${datePicker.dayOfMonth}",Toast.LENGTH_LONG).show()
+            val tv = findViewById<TextView>(R.id.tv)
+            tv.text = "${datePicker.year} / ${datePicker.month} / ${datePicker.dayOfMonth}"
+          // TODO bind date to dateAvailable variable (also add this variable)
+            // TODO also include in update
+        }
+
 
         if (intent.hasExtra("listing_edit")) {
             edit = true
@@ -139,7 +159,10 @@ class FreeCycleActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+
+
     }
+
 
 
 }

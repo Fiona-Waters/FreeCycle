@@ -3,6 +3,7 @@ package org.wit.freecycle.models
 import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 @Parcelize
 data class FreecycleModel(var id: Long = 0, var name: String = "",

@@ -19,5 +19,6 @@
     <string name="listing_status">Item Available</string>
     <string name="toggle_textOff">Listing Inactive</string>
     <string name="toggle_textOn">Listing Active</string>
+    <string name="date_picker">Date Available</string>
 
 </resources>
