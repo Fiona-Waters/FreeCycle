@@ -6,11 +6,14 @@ import com.google.gson.*
 import com.google.gson.reflect.TypeToken
 import org.wit.freecycle.helpers.*
 import timber.log.Timber
+import java.lang.Exception
 import java.lang.reflect.Type
+import java.time.LocalDate
 import java.util.*
 
 const val JSON_FILE = "listings.json"
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
+    .registerTypeAdapter(LocalDate::class.java, LocalDateParser())
     .registerTypeAdapter(Uri::class.java, UriParser())
     .create()
 val listType: Type = object : TypeToken<ArrayList<FreecycleModel>>() {}.type
@@ -50,6 +53,7 @@ class FreecycleJSONStore(private val context: Context) : FreecycleStore {
             foundListing.listingDescription = listing.listingDescription
             foundListing.image = listing.image
             foundListing.itemAvailable = listing.itemAvailable
+            foundListing.dateAvailable = listing.dateAvailable
             logAll()
         }
         serialize()
@@ -86,6 +90,24 @@ class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
 
     override fun serialize(
         src: Uri?,
+        typeOfSrc: Type?,
+        context: JsonSerializationContext?
+    ): JsonElement {
+        return JsonPrimitive(src.toString())
+    }
+}
+
+class LocalDateParser : JsonDeserializer<LocalDate>,JsonSerializer<LocalDate> {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): LocalDate {
+        return LocalDate.parse(json?.asString)
+    }
+
+    override fun serialize(
+        src: LocalDate?,
         typeOfSrc: Type?,
         context: JsonSerializationContext?
     ): JsonElement {

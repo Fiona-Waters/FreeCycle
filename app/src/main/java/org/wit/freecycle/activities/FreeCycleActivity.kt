@@ -20,6 +20,10 @@ import org.wit.freecycle.helpers.showImagePicker
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
 import timber.log.Timber.i
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -52,26 +56,16 @@ class FreeCycleActivity : AppCompatActivity() {
         }
         registerImagePickerCallback()
 
-//        val datePicker = findViewById<DatePicker>(R.id.date_Picker)
-//        val today = Calendar.getInstance()
-//        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-//            today.get(Calendar.DAY_OF_MONTH)
-//
-//        ) { view, year, month, day ->
-//            val month = month + 1
-//            val msg = "You Selected: $day/$month/$year"
-//            Toast.makeText(this@FreeCycleActivity, msg, Toast.LENGTH_SHORT).show()
-//        }
+        val datePicker = findViewById<DatePicker>(R.id.datePicker)
+        val today = Calendar.getInstance()
+        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
 
-        binding.btn.setOnClickListener {
-            val datePicker = findViewById<DatePicker>(R.id.datePicker)
-            Toast.makeText(this,"${datePicker.year} / ${datePicker.month} / ${datePicker.dayOfMonth}",Toast.LENGTH_LONG).show()
-            val tv = findViewById<TextView>(R.id.tv)
-            tv.text = "${datePicker.year} / ${datePicker.month} / ${datePicker.dayOfMonth}"
-          // TODO bind date to dateAvailable variable (also add this variable)
-            // TODO also include in update
+        ) { view, year, month, day ->
+            val month = month + 1
+            val msg = "You Selected: $day/$month/$year"
+            Toast.makeText(this@FreeCycleActivity, msg, Toast.LENGTH_SHORT).show()
         }
-
 
         if (intent.hasExtra("listing_edit")) {
             edit = true
@@ -84,7 +78,14 @@ class FreeCycleActivity : AppCompatActivity() {
             binding.toggleButton.isChecked = listing.itemAvailable
             binding.btnAdd.setText(R.string.save_listing)
             binding.deleteListing.setText(R.string.button_delete_listing)
+            datePicker.init(listing.dateAvailable.year, listing.dateAvailable.monthValue,
+                listing.dateAvailable.dayOfMonth
 
+            ) { view, year, month, day ->
+                val month = month + 1
+                val msg = "You Selected: $day/$month/$year"
+                Toast.makeText(this@FreeCycleActivity, msg, Toast.LENGTH_SHORT).show()
+            }
             // only show delete listing button in edit view
             binding.deleteListing.setVisibility(View.VISIBLE)
 
@@ -102,6 +103,8 @@ class FreeCycleActivity : AppCompatActivity() {
             listing.listingTitle = binding.listingTitle.text.toString()
             listing.listingDescription = binding.listingDescription.text.toString()
             listing.itemAvailable = binding.toggleButton.isChecked
+            val dateSelected = LocalDate.of(binding.datePicker.year, binding.datePicker.month, binding.datePicker.dayOfMonth)
+            listing.dateAvailable = dateSelected
 
             if (listing.listingTitle.isNotEmpty() && listing.listingDescription.isNotEmpty() && listing.name.isNotEmpty() && listing.location.isNotEmpty() && listing.eircode.isNotEmpty()) {
                 if(edit) {
@@ -141,6 +144,7 @@ class FreeCycleActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -162,7 +166,5 @@ class FreeCycleActivity : AppCompatActivity() {
 
 
     }
-
-
 
 }
