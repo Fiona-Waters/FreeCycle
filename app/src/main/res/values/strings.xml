@@ -20,5 +20,12 @@
     <string name="toggle_textOff">Listing Inactive</string>
     <string name="toggle_textOn">Listing Active</string>
     <string name="date_picker">Date Available</string>
+    <string name="login">Login</string>
+    <string name="firstName"> First Name</string>
+    <string name="lastName"> Last Name</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="signup">Sign Up</string>
 
 </resources>

@@ -2,10 +2,8 @@ package org.wit.freecycle.models
 
 import android.net.Uri
 import android.os.Parcelable
-import android.widget.DatePicker
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
-import java.util.*
 
 @Parcelize
 data class FreecycleModel(var id: Long = 0, var name: String = "",
