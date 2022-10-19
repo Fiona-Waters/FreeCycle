@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import org.wit.freecycle.databinding.CardFreecycleBinding
 import org.wit.freecycle.models.FreecycleModel
+import org.wit.freecycle.models.UserModel
 
 interface FreecycleListener {
     fun onListingClick(listing: FreecycleModel)

@@ -8,7 +8,7 @@ internal fun getUserId(): Long {
     return lastUserId++
 }
 
-class UserMemStore : UserStore {
+abstract class UserMemStore : UserStore {
 
     val users = ArrayList<UserModel>()
 
@@ -22,7 +22,7 @@ class UserMemStore : UserStore {
          logAll()
     }
 
-     override fun login(userEmail: UserModel, userPassword: UserModel ) {
+      fun login(userEmail: UserModel, userPassword: UserModel ) {
         // TODO if the users password matches then log them in i.e. move to freecycleListActivity
         // TODO only view their own listings?
     }
