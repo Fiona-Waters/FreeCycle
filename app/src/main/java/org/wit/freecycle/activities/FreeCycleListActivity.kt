@@ -27,7 +27,6 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
         setContentView(binding.root)
 
         app = application as MainApp
-
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = FreecycleAdapter(app.listings.findAll(), this)

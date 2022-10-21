@@ -23,9 +23,9 @@ class MainApp : Application() {
 
         i("FreeCycle app started")
         // seeding listings and users
-//        listings.create(FreecycleModel(0,"Fiona Waters", "Waterford", "X91YK7P", "Washing Machine", "Zanuzzi xyz123 in working order", itemAvailable = false))
-//        listings.create(FreecycleModel(1,"Mary Murphy", "Waterford", "X91YK7P", "Skateboard", "Zanuzzi xyz123 in working order", itemAvailable = true))
-//        listings.create(FreecycleModel(2,"John O'Shea", "Waterford", "X91YK7P", "Kids Clothes", "Zanuzzi xyz123 in working order", itemAvailable = false))
+//        listings.create(FreecycleModel(0,"Fiona Waters", "Washing Machine", "Zanuzzi xyz123 in working order", itemAvailable = false))
+//        listings.create(FreecycleModel(1,"Mary Murphy", "Skateboard", "Zanuzzi xyz123 in working order", itemAvailable = true))
+//        listings.create(FreecycleModel(2,"John O'Shea", "Kids Clothes", "Zanuzzi xyz123 in working order", itemAvailable = false))
 //        users.create(UserModel(1, "Fiona", "Waters", "fiona@fiona.com", "password"))
 //        users.create(UserModel(1, "Ciaran", "Waters", "ciaran@ciaran.com", "password"))
 //        users.create(UserModel(1, "Homer", "Simpson", "homer@simpson.com", "password"))

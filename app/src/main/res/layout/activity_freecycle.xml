@@ -68,37 +68,6 @@
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/location"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_margin="8dp"
-                    android:autofillHints=""
-                    android:hint="@string/hint_userTextLocation"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="18sp" />
-
-
-                <EditText
-                    android:id="@+id/eircode"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_margin="8dp"
-                    android:autofillHints=""
-                    android:hint="@string/hint_userEircode"
-                    android:inputType="text"
-                    android:maxLength="8"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="18sp" />
-
-                <EditText
                     android:id="@+id/listingTitle"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -128,13 +97,7 @@
                     android:textColorHint="@color/black"
                     android:textSize="18sp" />
 
-                <DatePicker
-                    android:id="@+id/datePicker"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:datePickerMode="spinner"
-                    android:calendarViewShown="false" />
+
 
                 <TextView
                     android:id="@+id/tv"
@@ -142,26 +105,31 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:text="@string/date_available"
+                    android:padding="10dp"
                     android:textSize="20dp"
                     android:textColor="#101010"/>
 
-                <ToggleButton
-                    android:id="@+id/toggleButton"
+                <DatePicker
+                    android:id="@+id/datePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/selector"
-                    android:checked="true"
-                    android:padding="10dp"
-                    android:textOff="@string/toggle_textOff"
-                    android:textOn="@string/toggle_textOn"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner" />
 
+                <Button
+                    android:id="@+id/pickupLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:stateListAnimator="@null"
+                    android:text="@string/button_location"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"/>
 
                 <Button
                     android:id="@+id/chooseImage"
@@ -181,14 +149,32 @@
                     android:id="@+id/ListingImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="12dp"
                     app:srcCompat="@mipmap/ic_launcher" />
 
+
+                <ToggleButton
+                    android:id="@+id/toggleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector"
+                    android:checked="true"
+                    android:padding="10dp"
+                    android:textOff="@string/toggle_textOff"
+                    android:textOn="@string/toggle_textOn"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="10dp"
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addListing"

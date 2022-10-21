@@ -35,11 +35,6 @@ class FreecycleAdapter constructor(private var listings: List<FreecycleModel>, p
         fun bind(listing: FreecycleModel, listener: FreecycleListener) {
             binding.listingTitle.text = listing.listingTitle
             binding.name.text = listing.name
-    //        binding.location.text = listing.location
-    //        binding.eircode.text = listing.eircode
-            binding.listingTitle.text = listing.listingTitle
-    //        binding.listingDescription.text = listing.listingDescription
-    //        binding.userTextLocation.text = listing.userTextLocation
             Picasso.get().load(listing.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onListingClick(listing) }
         }

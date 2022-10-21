@@ -31,6 +31,8 @@ class FreeCycleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFreecycleBinding
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+
     var listing = FreecycleModel()
     lateinit var app : MainApp
 
@@ -66,6 +68,11 @@ class FreeCycleActivity : AppCompatActivity() {
             val msg = "You Selected: $day/$month/$year"
             Toast.makeText(this@FreeCycleActivity, msg, Toast.LENGTH_SHORT).show()
         }
+        registerMapCallback()
+        binding.pickupLocation.setOnClickListener {
+            val launcherIntent = Intent(this, MapActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
+        }
 
         if (intent.hasExtra("listing_edit")) {
             edit = true
@@ -73,8 +80,6 @@ class FreeCycleActivity : AppCompatActivity() {
             binding.listingTitle.setText(listing.listingTitle)
             binding.listingDescription.setText(listing.listingDescription)
             binding.name.setText(listing.name)
-            binding.location.setText(listing.location)
-            binding.eircode.setText(listing.eircode)
             binding.toggleButton.isChecked = listing.itemAvailable
             binding.btnAdd.setText(R.string.save_listing)
             binding.deleteListing.setText(R.string.button_delete_listing)
@@ -98,15 +103,13 @@ class FreeCycleActivity : AppCompatActivity() {
         }
         binding.btnAdd.setOnClickListener() {
             listing.name = binding.name.text.toString()
-            listing.location = binding.location.text.toString()
-            listing.eircode = binding.eircode.text.toString()
             listing.listingTitle = binding.listingTitle.text.toString()
             listing.listingDescription = binding.listingDescription.text.toString()
             listing.itemAvailable = binding.toggleButton.isChecked
             val dateSelected = LocalDate.of(binding.datePicker.year, binding.datePicker.month, binding.datePicker.dayOfMonth)
             listing.dateAvailable = dateSelected
 
-            if (listing.listingTitle.isNotEmpty() && listing.listingDescription.isNotEmpty() && listing.name.isNotEmpty() && listing.location.isNotEmpty() && listing.eircode.isNotEmpty()) {
+            if (listing.listingTitle.isNotEmpty() && listing.listingDescription.isNotEmpty() && listing.name.isNotEmpty()) {
                 if(edit) {
                     app.listings.update(listing.copy())
                 } else {
@@ -165,6 +168,12 @@ class FreeCycleActivity : AppCompatActivity() {
             }
 
 
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
     }
 
 }
