@@ -22,9 +22,8 @@ abstract class UserMemStore : UserStore {
          logAll()
     }
 
-      fun login(userEmail: UserModel, userPassword: UserModel ) {
+     fun login(userEmail: UserModel, userPassword: UserModel ) {
         // TODO if the users password matches then log them in i.e. move to freecycleListActivity
-        // TODO only view their own listings?
     }
     // TODO
 

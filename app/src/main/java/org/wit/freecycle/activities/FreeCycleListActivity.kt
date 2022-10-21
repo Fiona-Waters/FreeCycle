@@ -34,7 +34,7 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
-
+        loadListings()
         registerRefreshCallback()
     }
 
@@ -62,7 +62,16 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { binding.recyclerView.adapter?.notifyDataSetChanged() }
+            { loadListings() }
+    }
+
+    private fun loadListings() {
+        showListings(app.listings.findAll())
+    }
+
+    fun showListings (listings: List<FreecycleModel>) {
+        binding.recyclerView.adapter = FreecycleAdapter(listings, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
 

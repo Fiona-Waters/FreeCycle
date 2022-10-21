@@ -9,8 +9,8 @@ import kotlin.collections.ArrayList
 
 class MainApp : Application() {
 
-   // val listings = ArrayList<FreecycleModel>()
-   // val listings = FreecycleMemStore()
+    // val listings = ArrayList<FreecycleModel>()
+    // val listings = FreecycleMemStore()
     lateinit var listings: FreecycleStore
     lateinit var users: UserJSONStore
 
@@ -31,4 +31,5 @@ class MainApp : Application() {
 //        users.create(UserModel(1, "Homer", "Simpson", "homer@simpson.com", "password"))
 //        i("list of users: {$users}")
 //    }
+    }
 }
