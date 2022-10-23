@@ -31,6 +31,9 @@ class FreecycleMemStore : FreecycleStore {
             foundListing.image = listing.image
             foundListing.itemAvailable = listing.itemAvailable
             foundListing.dateAvailable = listing.dateAvailable
+            foundListing.lat = listing.lat
+            foundListing.lng = listing.lng
+            foundListing.zoom = listing.zoom
             logAll()
         }
     }

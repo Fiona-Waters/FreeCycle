@@ -8,4 +8,10 @@ import java.time.LocalDate
 @Parcelize
 data class FreecycleModel(var id: Long = 0, var name: String = "",
                           var listingTitle: String = "", var listingDescription: String = "",
-                          var image: Uri = Uri.EMPTY, var itemAvailable: Boolean = true, var dateAvailable: LocalDate = LocalDate.now()   ) : Parcelable
+                          var image: Uri = Uri.EMPTY, var lat: Double = 0.0, var lng: Double = 0.0,
+                          var zoom: Float = 0f, var itemAvailable: Boolean = true, var dateAvailable: LocalDate = LocalDate.now()   ) : Parcelable
+
+@Parcelize
+data class Location(var lat: Double = 0.0,
+                    var lng: Double = 0.0,
+                    var zoom: Float = 0f) : Parcelable

@@ -30,5 +30,7 @@
     <string name="button_location">Set Location</string>
     <string name="date_available">Date Available</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="menu_search">Search</string>
+    <string name="search_box">Type search terms here</string>
 
 </resources>

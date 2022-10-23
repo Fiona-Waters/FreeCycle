@@ -19,6 +19,7 @@ import org.wit.freecycle.databinding.ActivityFreecycleBinding
 import org.wit.freecycle.helpers.showImagePicker
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
+import org.wit.freecycle.models.Location
 import timber.log.Timber.i
 import java.time.Instant
 import java.time.LocalDate
@@ -68,11 +69,20 @@ class FreeCycleActivity : AppCompatActivity() {
             val msg = "You Selected: $day/$month/$year"
             Toast.makeText(this@FreeCycleActivity, msg, Toast.LENGTH_SHORT).show()
         }
-        registerMapCallback()
+
+        // var location = Location(52.245696, -7.139102, 15f)
         binding.pickupLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (listing.zoom != 0f) {
+                location.lat = listing.lat
+                location.lng = listing.lng
+                location.zoom = listing.zoom
+            }
             val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
+        registerMapCallback()
 
         if (intent.hasExtra("listing_edit")) {
             edit = true
@@ -147,7 +157,6 @@ class FreeCycleActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -173,7 +182,21 @@ class FreeCycleActivity : AppCompatActivity() {
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { i("Map Loaded") }
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            listing.lat = location.lat
+                            listing.lng = location.lng
+                            listing.zoom = location.zoom
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 
 }
