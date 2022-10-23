@@ -175,8 +175,6 @@ class FreeCycleActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
-
-
     }
 
     private fun registerMapCallback() {
@@ -198,5 +196,4 @@ class FreeCycleActivity : AppCompatActivity() {
                 }
             }
     }
-
 }

@@ -1,16 +1,14 @@
 package org.wit.freecycle.activities
 
-import android.app.SearchManager
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
-import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.MenuItemCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.freecycle.R
 import org.wit.freecycle.adapters.FreecycleAdapter
@@ -18,15 +16,14 @@ import org.wit.freecycle.adapters.FreecycleListener
 import org.wit.freecycle.databinding.ActivityFreeCycleListBinding
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
-import timber.log.Timber.i
 import java.util.*
-import kotlin.collections.ArrayList
 
 class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityFreeCycleListBinding
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+    var searchListings = mutableListOf<FreecycleModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,21 +39,36 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
         loadListings()
         registerRefreshCallback()
-
-        i("INTENT")
-        if(Intent.ACTION_SEARCH == intent.action) {
-            i("SEARCH")
-            intent.getStringExtra(SearchManager.QUERY)?.also { query -> doMySearch(query)}
-        }
     }
 
-    fun doMySearch(query : String) {
-        //TODO if query matches something in title
-        // of listings array then show this/these items
-        i("search query %v", query)
-    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
+        val item = menu.findItem(R.id.search_button)
+        val searchView = item?.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchListings.clear()
+                var newArrayList = app.listings.findAll()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if (searchText.isNotEmpty()) {
+                    newArrayList.forEach {
+                        if (it.listingTitle.toLowerCase(Locale.getDefault()).contains(searchText)) {
+                            searchListings.add(it)
+                        }
+                    }
+                    binding.recyclerView.adapter?.notifyDataSetChanged()
+                } else {
+                    searchListings.addAll(newArrayList)
+                    binding.recyclerView.adapter?.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -69,10 +81,6 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onSearchRequested(): Boolean {
-        return super.onSearchRequested()
     }
 
     override fun onListingClick(listing: FreecycleModel) {
@@ -88,11 +96,13 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
     }
 
     private fun loadListings() {
-        showListings(app.listings.findAll())
+        searchListings.addAll(app.listings.findAll())
+        showListings()
     }
 
-    private fun showListings (listings: List<FreecycleModel>) {
-        binding.recyclerView.adapter = FreecycleAdapter(listings, this)
+    @SuppressLint("NotifyDataSetChanged")
+    private fun showListings () {
+        binding.recyclerView.adapter = FreecycleAdapter(searchListings, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }
