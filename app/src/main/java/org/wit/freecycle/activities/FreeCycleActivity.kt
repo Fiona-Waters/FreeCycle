@@ -90,6 +90,7 @@ class FreeCycleActivity : AppCompatActivity() {
             binding.listingTitle.setText(listing.listingTitle)
             binding.listingDescription.setText(listing.listingDescription)
             binding.name.setText(listing.name)
+            binding.phoneNumber.setText(listing.contactNumber)
             binding.toggleButton.isChecked = listing.itemAvailable
             binding.btnAdd.setText(R.string.save_listing)
             binding.deleteListing.setText(R.string.button_delete_listing)
@@ -113,6 +114,7 @@ class FreeCycleActivity : AppCompatActivity() {
         }
         binding.btnAdd.setOnClickListener() {
             listing.name = binding.name.text.toString()
+            listing.contactNumber = binding.phoneNumber.text.toString()
             listing.listingTitle = binding.listingTitle.text.toString()
             listing.listingDescription = binding.listingDescription.text.toString()
             listing.itemAvailable = binding.toggleButton.isChecked

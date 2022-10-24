@@ -26,6 +26,7 @@ class FreecycleMemStore : FreecycleStore {
         var foundListing: FreecycleModel? = listings.find{ l -> l.id == listing.id}
         if (foundListing != null) {
             foundListing.name = listing.name
+            foundListing.contactNumber = listing.contactNumber
             foundListing.listingTitle = listing.listingTitle
             foundListing.listingDescription = listing.listingDescription
             foundListing.image = listing.image

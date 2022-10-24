@@ -32,5 +32,6 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="menu_search">Search</string>
     <string name="search_box">Type search terms here</string>
+    <string name="hint_listingContactNumber">Contact Number</string>
 
 </resources>

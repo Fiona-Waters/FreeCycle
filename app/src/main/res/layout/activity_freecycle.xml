@@ -68,6 +68,21 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/phoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints=""
+                    android:hint="@string/hint_listingContactNumber"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+
+                <EditText
                     android:id="@+id/listingTitle"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
