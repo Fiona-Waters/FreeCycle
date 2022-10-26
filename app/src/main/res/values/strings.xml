@@ -33,5 +33,15 @@
     <string name="menu_search">Search</string>
     <string name="search_box">Type search terms here</string>
     <string name="hint_listingContactNumber">Contact Number</string>
+    <string name="pickup_location">Pick Up Location</string>
+    <string name="listing_image">Listing Image</string>
+    <string name="name_title">Name</string>
+    <string name="contactNumber_title">Contact Number</string>
+    <string name="listingTitle_title">Listing Title</string>
+    <string name="listingDescription_title">Listing Description</string>
+    <string name="dateAvailable_title">Date Available</string>
+    <string name="pickupLocation_title">Pickup Location</string>
+    <string name="listingImage_title">Image</string>
+    <string name="itemAvailable_title">Item Availability</string>
 
 </resources>

@@ -22,7 +22,7 @@ fun generateRandomUserId(): Long {
     return Random().nextLong()
 }
 
-class UserJSONStore (private val context: Context) : UserStore {
+class UserJSONStore(private val context: Context) : UserStore {
     var users = mutableListOf<UserModel>()
 
     init {
@@ -41,13 +41,14 @@ class UserJSONStore (private val context: Context) : UserStore {
         users.add(user)
         serialize()
     }
-
-    override fun login(userEmail: String, userPassword: String) : Boolean {
+// TODO how to return a user object from login function
+    override fun login(userEmail: String, userPassword: String): UserModel? {
         val users = findAll()
         var auth = false
-        for(user in users) {
+        for (user in users) {
             if (user.userEmail == userEmail && user.userPassword == userPassword) {
                 auth = true
+                return user
                 i("PASSWORD MATCHES")
                 break
             } else {
@@ -55,15 +56,15 @@ class UserJSONStore (private val context: Context) : UserStore {
                 i("NO MATCHING PASSWORD")
             }
         }
-        return auth
-
+        return null
+// TODO either return user object or null
     }
 
 
 // TODO use if allowing user to update details
 
     override fun update(user: UserModel) {
-        var foundUser: UserModel? = users.find{ u -> u.userId == user.userId}
+        var foundUser: UserModel? = users.find { u -> u.userId == user.userId }
         if (foundUser != null) {
             foundUser.firstName = user.firstName
             foundUser.lastName = user.lastName
@@ -83,6 +84,7 @@ class UserJSONStore (private val context: Context) : UserStore {
         val jsonString = gsonBuilder2.toJson(users, listType2)
         write(context, JSON_FILE2, jsonString)
     }
+
     private fun deserialize() {
         val jsonString = read(context, JSON_FILE2)
         users = gsonBuilder2.fromJson(jsonString, listType2)

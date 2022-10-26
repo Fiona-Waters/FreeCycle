@@ -84,8 +84,11 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
     }
 
     override fun onListingClick(listing: FreecycleModel) {
-        val launcherIntent = Intent(this, FreeCycleActivity::class.java)
-        launcherIntent.putExtra("listing_edit", listing)
+        // if
+        val launcherIntent = Intent(this, ViewListingActivity::class.java)
+        //launcherIntent.putExtra("listing_edit", listing)
+
+        launcherIntent.putExtra("listing", listing)
         refreshIntentLauncher.launch(launcherIntent)
     }
 

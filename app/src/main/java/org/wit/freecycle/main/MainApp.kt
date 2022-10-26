@@ -13,6 +13,7 @@ class MainApp : Application() {
     // val listings = FreecycleMemStore()
     lateinit var listings: FreecycleStore
     lateinit var users: UserJSONStore
+    var user: UserModel? = null
 
 
     override fun onCreate() {

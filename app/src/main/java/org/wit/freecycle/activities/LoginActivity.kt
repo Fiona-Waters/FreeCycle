@@ -46,7 +46,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnSubmit.setOnClickListener() {
             var email = binding.userEmail.text.toString()
             var password = binding.userPassword.text.toString()
-            if (app.users.login(email, password)) {
+            // if user isn't null ?
+            // then take that value and store it somewhere that's globally accessible
+            var loggedInUser = app.users.login(email, password)
+            if (loggedInUser !=null) {
+                app.user = loggedInUser
                 val launcherIntent = Intent(this, FreeCycleListActivity::class.java)
                 startActivityForResult(launcherIntent, 0)
             } else {

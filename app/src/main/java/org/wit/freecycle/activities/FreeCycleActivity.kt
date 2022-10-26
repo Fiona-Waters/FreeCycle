@@ -20,6 +20,7 @@ import org.wit.freecycle.helpers.showImagePicker
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
 import org.wit.freecycle.models.Location
+import org.wit.freecycle.models.UserModel
 import timber.log.Timber.i
 import java.time.Instant
 import java.time.LocalDate
@@ -31,11 +32,11 @@ import java.util.*
 class FreeCycleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFreecycleBinding
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
-    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
     var listing = FreecycleModel()
-    lateinit var app : MainApp
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         var edit = false
@@ -43,7 +44,7 @@ class FreeCycleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_freecycle)
 
         i("FreeCycle Activity started..")
-      //  binding.deleteListing.setEnabled(false)
+        //  binding.deleteListing.setEnabled(false)
         binding = ActivityFreecycleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -61,7 +62,8 @@ class FreeCycleActivity : AppCompatActivity() {
 
         val datePicker = findViewById<DatePicker>(R.id.datePicker)
         val today = Calendar.getInstance()
-        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+        datePicker.init(
+            today.get(Calendar.YEAR), today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
 
         ) { view, year, month, day ->
@@ -84,6 +86,10 @@ class FreeCycleActivity : AppCompatActivity() {
         }
         registerMapCallback()
 
+        //listing.userId = app.user?.userId ?: 0
+        i("userId %s", app.user?.userId)
+        i("listing.userId %s", listing.userId)
+
         if (intent.hasExtra("listing_edit")) {
             edit = true
             listing = intent.extras?.getParcelable("listing_edit")!!
@@ -94,7 +100,8 @@ class FreeCycleActivity : AppCompatActivity() {
             binding.toggleButton.isChecked = listing.itemAvailable
             binding.btnAdd.setText(R.string.save_listing)
             binding.deleteListing.setText(R.string.button_delete_listing)
-            datePicker.init(listing.dateAvailable.year, listing.dateAvailable.monthValue,
+            datePicker.init(
+                listing.dateAvailable.year, listing.dateAvailable.monthValue,
                 listing.dateAvailable.dayOfMonth
 
             ) { view, year, month, day ->
@@ -118,11 +125,19 @@ class FreeCycleActivity : AppCompatActivity() {
             listing.listingTitle = binding.listingTitle.text.toString()
             listing.listingDescription = binding.listingDescription.text.toString()
             listing.itemAvailable = binding.toggleButton.isChecked
-            val dateSelected = LocalDate.of(binding.datePicker.year, binding.datePicker.month, binding.datePicker.dayOfMonth)
+            val dateSelected = LocalDate.of(
+                binding.datePicker.year,
+                binding.datePicker.month,
+                binding.datePicker.dayOfMonth
+            )
             listing.dateAvailable = dateSelected
 
+            if(listing.userId == null) {
+                listing.userId = app.user?.userId ?: 0
+            }
+
             if (listing.listingTitle.isNotEmpty() && listing.listingDescription.isNotEmpty() && listing.name.isNotEmpty()) {
-                if(edit) {
+                if (edit) {
                     app.listings.update(listing.copy())
                 } else {
                     app.listings.create(listing.copy())
@@ -130,10 +145,9 @@ class FreeCycleActivity : AppCompatActivity() {
                 }
                 setResult(RESULT_OK)
                 finish()
-            }
-            else {
+            } else {
                 Snackbar
-                    .make(it,R.string.all_fields_required, Snackbar.LENGTH_LONG)
+                    .make(it, R.string.all_fields_required, Snackbar.LENGTH_LONG)
                     .show()
             }
         }
@@ -149,11 +163,12 @@ class FreeCycleActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.listing_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.cancel_button -> {
                 val launcherIntent = Intent(this, FreeCycleListActivity::class.java)
-                startActivityForResult(launcherIntent,0)
+                startActivityForResult(launcherIntent, 0)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -163,7 +178,7 @@ class FreeCycleActivity : AppCompatActivity() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->
-                when(result.resultCode){
+                when (result.resultCode) {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
@@ -174,7 +189,8 @@ class FreeCycleActivity : AppCompatActivity() {
                             binding.chooseImage.setText(R.string.edit_image)
                         } // end of if
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }
@@ -187,14 +203,16 @@ class FreeCycleActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            val location =
+                                result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
                             listing.lat = location.lat
                             listing.lng = location.lng
                             listing.zoom = location.zoom
                         } // end of if
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }

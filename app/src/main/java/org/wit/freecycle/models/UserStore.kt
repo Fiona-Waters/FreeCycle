@@ -9,5 +9,5 @@ interface UserStore {
     fun create(user: UserModel)
     fun update(user: UserModel)
     fun delete(user: UserModel)
-    fun login(userEmail: String, userPassword: String): Boolean
+    fun login(userEmail: String, userPassword: String): UserModel?
 }

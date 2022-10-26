@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FreeCycle"
         tools:ignore="ExtraText">
+        <activity
+            android:name=".activities.ViewListingActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -26,14 +29,15 @@
             android:exported="true" />
         <activity
             android:name=".activities.FreeCycleListActivity"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        <meta-data android:name="android.app.searchable"
-            android:resource="@xml/searchable"/>
-        </activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity android:name=".activities.FreeCycleActivity" />
         <activity
             android:name=".activities.SplashScreen"
