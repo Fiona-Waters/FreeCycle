@@ -99,6 +99,7 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
     }
 
     private fun loadListings() {
+        searchListings.clear()
         searchListings.addAll(app.listings.findAll())
         showListings()
     }

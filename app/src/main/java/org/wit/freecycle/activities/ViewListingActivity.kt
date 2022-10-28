@@ -36,8 +36,6 @@ class ViewListingActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         app = application as MainApp
 
-
-// TODO set listing
         listing = intent.extras?.getParcelable("listing")!!
         binding.name.text = listing.name
         binding.contactNumber.text = listing.contactNumber
@@ -54,8 +52,13 @@ class ViewListingActivity : AppCompatActivity() {
             .load(listing.image)
             .into(binding.imageIcon)
 
-        binding.itemAvailability.text = listing.itemAvailable.toString()
-
+        val available = "Available"
+        val unavailable = "Unavailable"
+        if (listing.itemAvailable) {
+            binding.itemAvailability.text = available
+        } else {
+            binding.itemAvailability.text = unavailable
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

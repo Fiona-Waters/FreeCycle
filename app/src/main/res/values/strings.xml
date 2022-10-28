@@ -43,5 +43,7 @@
     <string name="pickupLocation_title">Pickup Location</string>
     <string name="listingImage_title">Image</string>
     <string name="itemAvailable_title">Item Availability</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
 
 </resources>
