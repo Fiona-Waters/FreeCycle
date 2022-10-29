@@ -178,7 +178,7 @@
                         <TextView
 
                             android:id="@+id/listingDescriptionTitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:background="@color/colorAccent"
                             android:padding="17dip"
@@ -190,11 +190,12 @@
                         <TextView
 
                             android:id="@+id/listingDescription"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
                             android:padding="17dip"
                             android:text="@string/hint_listingDescription"
+                            android:scrollHorizontally="true"
                             android:textColor="#000"
                             android:textSize="14sp" />
                     </TableRow>
@@ -249,16 +250,18 @@
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <TextView
-
-                            android:id="@+id/pickupLocation"
-                            android:layout_width="wrap_content"
+                        <Button
+                            android:id="@+id/viewMap"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:padding="17dip"
-                            android:text="@string/pickup_location"
-                            android:textColor="#000"
-                            android:textSize="14sp" />
+                            android:background="@color/colorAccent"
+                            android:backgroundTint="@color/white"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:stateListAnimator="@null"
+                            android:text="@string/viewMap_button"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
                     </TableRow>
 
                     <TableRow

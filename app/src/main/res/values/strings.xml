@@ -45,5 +45,6 @@
     <string name="itemAvailable_title">Item Availability</string>
     <string name="available">Available</string>
     <string name="unavailable">Unavailable</string>
-
+    <string name="viewMap_button">View Map</string>
+    <string name="edit_button">Edit</string>
 </resources>

@@ -50,7 +50,27 @@
             app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toEndOf="@+id/imageIcon"
             app:layout_constraintTop_toBottomOf="@id/listingTitle"
-            tools:text="A Description" />
+            tools:text="Users Name" />
+
+        <ImageButton
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintStart_toEndOf="@id/listingTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit_note_fill0_wght400_grad0_opsz48" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

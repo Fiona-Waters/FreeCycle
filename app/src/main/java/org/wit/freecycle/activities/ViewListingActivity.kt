@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.squareup.picasso.Picasso
 import org.wit.freecycle.R
 import org.wit.freecycle.databinding.ActivityViewListingBinding
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
+import org.wit.freecycle.models.Location
 import timber.log.Timber.i
 
 
@@ -43,11 +46,21 @@ class ViewListingActivity : AppCompatActivity() {
         binding.listingDescription.text = listing.listingDescription
         binding.dateAvailable.text = listing.dateAvailable.toString()
 
-        //TODO how to set pick up location - map or just lat lng
-        //TODO have view map button which brings you to the map
-        // activity with the saved location
-        binding.pickupLocation.text = listing.lat.toString()
+        binding.viewMap.setOnClickListener {
+            val lat = listing.lat
+            val lng = listing.lng
+            val zoom = listing.zoom
+            val location = Location(lat, lng, zoom)
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+        registerMapCallback()
 
+        val image = findViewById<ImageView>(R.id.imageIcon)
+        if (listing.image != Uri.EMPTY) {
+            image.background = null
+        }
         Picasso.get()
             .load(listing.image)
             .into(binding.imageIcon)
@@ -74,5 +87,12 @@ class ViewListingActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            {
+            }
     }
 }

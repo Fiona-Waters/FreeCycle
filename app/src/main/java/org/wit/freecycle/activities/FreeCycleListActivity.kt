@@ -16,6 +16,7 @@ import org.wit.freecycle.adapters.FreecycleListener
 import org.wit.freecycle.databinding.ActivityFreeCycleListBinding
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
+import org.wit.freecycle.models.Location
 import java.util.*
 
 class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
@@ -39,6 +40,7 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
         loadListings()
         registerRefreshCallback()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
