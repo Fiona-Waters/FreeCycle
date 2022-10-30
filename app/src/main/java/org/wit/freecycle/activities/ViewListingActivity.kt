@@ -22,7 +22,6 @@ import timber.log.Timber.i
 class ViewListingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityViewListingBinding
-    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
@@ -72,7 +71,7 @@ class ViewListingActivity : AppCompatActivity() {
         } else {
             binding.itemAvailability.text = unavailable
         }
-        // only show edit button if listing belongs to user
+        // only show edit and delete buttons if listing belongs to user
         if (listing.userId == app.user?.userId) {
             binding.editButton.setVisibility(View.VISIBLE)
             binding.deleteListing.setVisibility(View.VISIBLE)

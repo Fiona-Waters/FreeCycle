@@ -23,7 +23,7 @@ class FreecycleMemStore : FreecycleStore {
     }
 
     override fun update(listing: FreecycleModel) {
-        var foundListing: FreecycleModel? = listings.find{ l -> l.id == listing.id}
+        var foundListing: FreecycleModel? = listings.find { l -> l.id == listing.id }
         if (foundListing != null) {
             foundListing.name = listing.name
             foundListing.contactNumber = listing.contactNumber
@@ -45,6 +45,6 @@ class FreecycleMemStore : FreecycleStore {
     }
 
     fun logAll() {
-        listings.forEach{ i("${it}")}
+        listings.forEach { i("${it}") }
     }
 }

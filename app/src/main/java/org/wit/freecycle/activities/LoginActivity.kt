@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import org.wit.freecycle.R
 import timber.log.Timber.i
 import org.wit.freecycle.databinding.ActivityLoginBinding
@@ -14,13 +13,12 @@ import org.wit.freecycle.models.UserModel
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
     var user = UserModel()
 
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
-       // var edit = false
+        // var edit = false
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -44,12 +42,12 @@ class LoginActivity : AppCompatActivity() {
 //
 //        }
         binding.btnSubmit.setOnClickListener() {
-            var email = binding.userEmail.text.toString()
-            var password = binding.userPassword.text.toString()
+            val email = binding.userEmail.text.toString()
+            val password = binding.userPassword.text.toString()
             // if user isn't null ?
             // then take that value and store it somewhere that's globally accessible
-            var loggedInUser = app.users.login(email, password)
-            if (loggedInUser !=null) {
+            val loggedInUser = app.users.login(email, password)
+            if (loggedInUser != null) {
                 app.user = loggedInUser
                 val launcherIntent = Intent(this, FreeCycleListActivity::class.java)
                 startActivityForResult(launcherIntent, 0)

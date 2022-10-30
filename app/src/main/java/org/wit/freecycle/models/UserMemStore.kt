@@ -16,19 +16,18 @@ abstract class UserMemStore : UserStore {
         return users
     }
 
-     override fun create(user: UserModel) {
-         user.userId = getId()
-         users.add(user)
-         logAll()
+    override fun create(user: UserModel) {
+        user.userId = getId()
+        users.add(user)
+        logAll()
     }
 
-     fun login(userEmail: UserModel, userPassword: UserModel ) {
-        // TODO if the users password matches then log them in i.e. move to freecycleListActivity
+    fun login(userEmail: UserModel, userPassword: UserModel) {
+        // TODO implement me
     }
-    // TODO
 
-   override fun update(user: UserModel) {
-        var foundUser: UserModel? = users.find{ u -> u.userId == user.userId}
+    override fun update(user: UserModel) {
+        var foundUser: UserModel? = users.find { u -> u.userId == user.userId }
         if (foundUser != null) {
             foundUser.firstName = user.firstName
             foundUser.lastName = user.lastName
@@ -38,12 +37,12 @@ abstract class UserMemStore : UserStore {
         }
     }
 
-    override fun delete( user: UserModel) {
+    override fun delete(user: UserModel) {
         users.remove(user)
         logAll()
     }
 
     fun logAll() {
-        users.forEach{i("${it}")}
+        users.forEach { i("${it}") }
     }
 }

@@ -12,13 +12,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.freecycle.R
-import org.wit.freecycle.databinding.ActivityMapBinding
 import org.wit.freecycle.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener,
+    GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
-  //  private lateinit var binding: ActivityMapBinding
     var location = Location()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +29,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-//        binding = ActivityMapBinding.inflate(layoutInflater)
 
     }
 
@@ -46,11 +44,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
         map.setOnMarkerDragListener(this)
         map.setOnMarkerClickListener(this)
-//        mMap.animateCamera(
-//            CameraUpdateFactory.newLatLngZoom(
-//                sydney, 12.0f
-//            )
-//        )
 
     }
 
@@ -65,6 +58,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
     }
+
     override fun onBackPressed() {
         val resultIntent = Intent()
         resultIntent.putExtra("location", location)

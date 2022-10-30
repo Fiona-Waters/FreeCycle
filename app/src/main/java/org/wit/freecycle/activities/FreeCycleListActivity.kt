@@ -23,7 +23,7 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityFreeCycleListBinding
-    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     var searchListings = mutableListOf<FreecycleModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
         menuInflater.inflate(R.menu.search_menu, menu)
         val item = menu.findItem(R.id.search_button)
         val searchView = item?.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 TODO("Not yet implemented")
             }
@@ -107,7 +107,7 @@ class FreeCycleListActivity : AppCompatActivity(), FreecycleListener {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun showListings () {
+    private fun showListings() {
         binding.recyclerView.adapter = FreecycleAdapter(searchListings, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }

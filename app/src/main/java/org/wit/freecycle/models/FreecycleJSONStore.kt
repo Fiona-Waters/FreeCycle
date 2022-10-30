@@ -44,7 +44,7 @@ class FreecycleJSONStore(private val context: Context) : FreecycleStore {
     }
 
     override fun update(listing: FreecycleModel) {
-        var foundListing: FreecycleModel? = listings.find{ l -> l.id == listing.id}
+        var foundListing: FreecycleModel? = listings.find { l -> l.id == listing.id }
         if (foundListing != null) {
             foundListing.name = listing.name
             foundListing.contactNumber = listing.contactNumber
@@ -78,7 +78,7 @@ class FreecycleJSONStore(private val context: Context) : FreecycleStore {
     }
 }
 
-class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
+class UriParser : JsonDeserializer<Uri>, JsonSerializer<Uri> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
@@ -96,7 +96,7 @@ class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
     }
 }
 
-class LocalDateParser : JsonDeserializer<LocalDate>,JsonSerializer<LocalDate> {
+class LocalDateParser : JsonDeserializer<LocalDate>, JsonSerializer<LocalDate> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,

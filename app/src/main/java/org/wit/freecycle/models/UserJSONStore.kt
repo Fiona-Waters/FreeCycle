@@ -41,23 +41,15 @@ class UserJSONStore(private val context: Context) : UserStore {
         users.add(user)
         serialize()
     }
-// TODO how to return a user object from login function
+
     override fun login(userEmail: String, userPassword: String): UserModel? {
         val users = findAll()
-        var auth = false
         for (user in users) {
             if (user.userEmail == userEmail && user.userPassword == userPassword) {
-                auth = true
                 return user
-                i("PASSWORD MATCHES")
-                break
-            } else {
-                auth = false
-                i("NO MATCHING PASSWORD")
             }
         }
         return null
-// TODO either return user object or null
     }
 
 
