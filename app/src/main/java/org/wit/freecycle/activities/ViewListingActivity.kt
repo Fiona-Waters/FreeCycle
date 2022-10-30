@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,6 +23,7 @@ class ViewListingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityViewListingBinding
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
     var listing = FreecycleModel()
@@ -51,8 +53,8 @@ class ViewListingActivity : AppCompatActivity() {
             val lng = listing.lng
             val zoom = listing.zoom
             val location = Location(lat, lng, zoom)
-            val launcherIntent = Intent(this, MapActivity::class.java)
-                .putExtra("location", location)
+            val launcherIntent =
+                Intent(this, MapActivity::class.java).putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
         registerMapCallback()
@@ -61,9 +63,7 @@ class ViewListingActivity : AppCompatActivity() {
         if (listing.image != Uri.EMPTY) {
             image.background = null
         }
-        Picasso.get()
-            .load(listing.image)
-            .into(binding.imageIcon)
+        Picasso.get().load(listing.image).into(binding.imageIcon)
 
         val available = "Available"
         val unavailable = "Unavailable"
@@ -72,6 +72,22 @@ class ViewListingActivity : AppCompatActivity() {
         } else {
             binding.itemAvailability.text = unavailable
         }
+        // only show edit button if listing belongs to user
+        if (listing.userId == app.user?.userId) {
+            binding.editButton.setVisibility(View.VISIBLE)
+            binding.deleteListing.setVisibility(View.VISIBLE)
+        }
+        binding.editButton.setOnClickListener() {
+            val launcherIntent = Intent(this, FreeCycleActivity::class.java)
+            launcherIntent.putExtra("listing_edit", listing)
+            refreshIntentLauncher.launch(launcherIntent)
+        }
+        binding.deleteListing.setOnClickListener() {
+            app.listings.delete(listing)
+            setResult(RESULT_OK)
+            finish()
+        }
+        registerRefreshCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -91,8 +107,25 @@ class ViewListingActivity : AppCompatActivity() {
 
     private fun registerMapCallback() {
         mapIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            {
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
+    }
+
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        val updatedListing =
+                            result.data?.extras?.getParcelable<FreecycleModel>("updated_listing")
+                        if (updatedListing != null) {
+                            // getting the updated listing and calling on create again
+                            intent.putExtra("listing", updatedListing)
+                            recreate()
+                        }
+                    }
+                }
             }
     }
+
+
 }

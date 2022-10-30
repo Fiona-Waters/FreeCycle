@@ -17,7 +17,10 @@ interface FreecycleListener {
     fun onListingClick(listing: FreecycleModel)
 }
 
-class FreecycleAdapter constructor(private var listings: List<FreecycleModel>, private val listener: FreecycleListener) :
+class FreecycleAdapter constructor(
+    private var listings: List<FreecycleModel>,
+    private val listener: FreecycleListener
+) :
     RecyclerView.Adapter<FreecycleAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -34,27 +37,20 @@ class FreecycleAdapter constructor(private var listings: List<FreecycleModel>, p
 
     override fun getItemCount(): Int = listings.size
 
-    class MainHolder(private val binding : CardFreecycleBinding) :
+    class MainHolder(private val binding: CardFreecycleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+        private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
 
         fun bind(listing: FreecycleModel, listener: FreecycleListener) {
             binding.listingTitle.text = listing.listingTitle
             binding.name.text = listing.name
-            Picasso.get().load(listing.image).resize(200,200).into(binding.imageIcon)
+            Picasso.get().load(listing.image).resize(200, 200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onListingClick(listing) }
-            binding.editButton.setOnClickListener{
-                val context = it.context.applicationContext
-                val launcherIntent = Intent(context, ViewListingActivity::class.java)
-                launcherIntent.putExtra("listing_edit", listing)
-                refreshIntentLauncher.launch(launcherIntent)
-            }
-            // TODO how to register refresh callback
         }
 
-
-        }
 
     }
+
 }
+

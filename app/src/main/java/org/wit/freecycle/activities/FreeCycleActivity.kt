@@ -4,14 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.freecycle.R
@@ -20,12 +17,8 @@ import org.wit.freecycle.helpers.showImagePicker
 import org.wit.freecycle.main.MainApp
 import org.wit.freecycle.models.FreecycleModel
 import org.wit.freecycle.models.Location
-import org.wit.freecycle.models.UserModel
 import timber.log.Timber.i
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -44,7 +37,6 @@ class FreeCycleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_freecycle)
 
         i("FreeCycle Activity started..")
-        //  binding.deleteListing.setEnabled(false)
         binding = ActivityFreecycleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -63,8 +55,7 @@ class FreeCycleActivity : AppCompatActivity() {
         val datePicker = findViewById<DatePicker>(R.id.datePicker)
         val today = Calendar.getInstance()
         datePicker.init(
-            today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-            today.get(Calendar.DAY_OF_MONTH)
+            today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH)
 
         ) { view, year, month, day ->
             val month = month + 1
@@ -80,13 +71,13 @@ class FreeCycleActivity : AppCompatActivity() {
                 location.lng = listing.lng
                 location.zoom = listing.zoom
             }
-            val launcherIntent = Intent(this, MapActivity::class.java)
-                .putExtra("location", location)
+            val launcherIntent =
+                Intent(this, MapActivity::class.java).putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
         registerMapCallback()
 
-        //listing.userId = app.user?.userId ?: 0
+        listing.userId = app.user?.userId ?: 0
         i("userId %s", app.user?.userId)
         i("listing.userId %s", listing.userId)
 
@@ -99,9 +90,9 @@ class FreeCycleActivity : AppCompatActivity() {
             binding.phoneNumber.setText(listing.contactNumber)
             binding.toggleButton.isChecked = listing.itemAvailable
             binding.btnAdd.setText(R.string.save_listing)
-            binding.deleteListing.setText(R.string.button_delete_listing)
             datePicker.init(
-                listing.dateAvailable.year, listing.dateAvailable.monthValue,
+                listing.dateAvailable.year,
+                listing.dateAvailable.monthValue,
                 listing.dateAvailable.dayOfMonth
 
             ) { view, year, month, day ->
@@ -109,12 +100,7 @@ class FreeCycleActivity : AppCompatActivity() {
                 val msg = "You Selected: $day/$month/$year"
                 Toast.makeText(this@FreeCycleActivity, msg, Toast.LENGTH_SHORT).show()
             }
-            // only show delete listing button in edit view
-            binding.deleteListing.setVisibility(View.VISIBLE)
-
-            Picasso.get()
-                .load(listing.image)
-                .into(binding.ListingImage)
+            Picasso.get().load(listing.image).into(binding.ListingImage)
             if (listing.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.edit_image)
             }
@@ -126,15 +112,9 @@ class FreeCycleActivity : AppCompatActivity() {
             listing.listingDescription = binding.listingDescription.text.toString()
             listing.itemAvailable = binding.toggleButton.isChecked
             val dateSelected = LocalDate.of(
-                binding.datePicker.year,
-                binding.datePicker.month,
-                binding.datePicker.dayOfMonth
+                binding.datePicker.year, binding.datePicker.month, binding.datePicker.dayOfMonth
             )
             listing.dateAvailable = dateSelected
-
-            if(listing.userId == null) {
-                listing.userId = app.user?.userId ?: 0
-            }
 
             if (listing.listingTitle.isNotEmpty() && listing.listingDescription.isNotEmpty() && listing.name.isNotEmpty()) {
                 if (edit) {
@@ -143,19 +123,11 @@ class FreeCycleActivity : AppCompatActivity() {
                     app.listings.create(listing.copy())
                     i("add Button Pressed: $listing")
                 }
-                setResult(RESULT_OK)
+                setResult(RESULT_OK, intent.putExtra("updated_listing", listing))
                 finish()
             } else {
-                Snackbar
-                    .make(it, R.string.all_fields_required, Snackbar.LENGTH_LONG)
-                    .show()
+                Snackbar.make(it, R.string.all_fields_required, Snackbar.LENGTH_LONG).show()
             }
-        }
-        binding.deleteListing.setOnClickListener() {
-            app.listings.delete(listing)
-            i("delete button pressed: $listing")
-            setResult(RESULT_OK)
-            finish()
         }
     }
 
@@ -176,16 +148,13 @@ class FreeCycleActivity : AppCompatActivity() {
 
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { result ->
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 when (result.resultCode) {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
                             listing.image = result.data!!.data!!
-                            Picasso.get()
-                                .load(listing.image)
-                                .into(binding.ListingImage)
+                            Picasso.get().load(listing.image).into(binding.ListingImage)
                             binding.chooseImage.setText(R.string.edit_image)
                         } // end of if
                     }
@@ -197,8 +166,7 @@ class FreeCycleActivity : AppCompatActivity() {
 
     private fun registerMapCallback() {
         mapIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { result ->
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 when (result.resultCode) {
                     RESULT_OK -> {
                         if (result.data != null) {
