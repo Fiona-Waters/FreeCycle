@@ -36,10 +36,11 @@ class UserJSONStore(private val context: Context) : UserStore {
         return users
     }
 
-    override fun create(user: UserModel) {
+    override fun create(user: UserModel) : UserModel {
         user.userId = generateRandomUserId()
         users.add(user)
         serialize()
+        return user
     }
 
     override fun login(userEmail: String, userPassword: String): UserModel? {

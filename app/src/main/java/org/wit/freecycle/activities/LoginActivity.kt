@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
             user.userPassword = binding.newUserPassword.text.toString()
 
             if (user.firstName.isNotEmpty() && user.lastName.isNotEmpty()) {
-                app.users.create(user.copy())
+                app.user = app.users.create(user.copy())
                 i("sign up Button Pressed: $user")
                 setResult(RESULT_OK)
                 finish()

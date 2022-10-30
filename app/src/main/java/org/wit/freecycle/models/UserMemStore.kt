@@ -16,10 +16,11 @@ abstract class UserMemStore : UserStore {
         return users
     }
 
-    override fun create(user: UserModel) {
+    override fun create(user: UserModel) : UserModel {
         user.userId = getId()
         users.add(user)
         logAll()
+        return user
     }
 
     fun login(userEmail: UserModel, userPassword: UserModel) {

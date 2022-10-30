@@ -77,7 +77,7 @@ class FreeCycleActivity : AppCompatActivity() {
         }
         registerMapCallback()
 
-        listing.userId = app.user?.userId ?: 0
+        listing.userId = app.user!!.userId!!
         i("userId %s", app.user?.userId)
         i("listing.userId %s", listing.userId)
 
@@ -106,6 +106,7 @@ class FreeCycleActivity : AppCompatActivity() {
             }
         }
         binding.btnAdd.setOnClickListener() {
+            listing.userId = app.user?.userId ?: 0
             listing.name = binding.name.text.toString()
             listing.contactNumber = binding.phoneNumber.text.toString()
             listing.listingTitle = binding.listingTitle.text.toString()
